@@ -7,28 +7,36 @@ public class HttpStatusImageDownloader {
     private static final HttpStatusChecker HTTP_STATUS_CHECKER = new HttpStatusChecker();
 
     public void downloadStatusImage(int code) {
+
+        String uri = HTTP_STATUS_CHECKER.getStatusImage(code);
+
         try {
-            URL url = new URL(HTTP_STATUS_CHECKER.getStatusImage(code));
+            if(uri.isEmpty()) {
+                new HttpImageStatusCli().askStatus();
 
-            String fileName = "Cat" + code + ".jpg";
-            String fileDestinationFolder = "../ImageDownloader/Cat_Images/";
+            } else {
+                URL url = new URL(uri);
 
-            InputStream inputStream = url.openStream();
-            OutputStream outputStream = new FileOutputStream(fileDestinationFolder + fileName);
+                String fileName = "Cat" + code + ".jpg";
+                String fileDestinationFolder = "../ImageDownloader/Cat_Images/";
 
-            byte[] buffer = new byte[2048];
-            int length;
+                InputStream inputStream = url.openStream();
+                OutputStream outputStream = new FileOutputStream(fileDestinationFolder + fileName);
 
-            while ((length = inputStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, length);
+                byte[] buffer = new byte[2048];
+                int length;
+
+                while ((length = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, length);
+                }
+                inputStream.close();
+                outputStream.close();
+
+                System.out.println("Cat with code " + code + " was downloaded");
+
             }
-            inputStream.close();
-            outputStream.close();
 
-            System.out.println("Cat with code " + code + " was downloaded");
-
-
-        } catch (IOException ignored) {}
+        } catch (IOException ex) {ex.printStackTrace();}
     }
 }
 

@@ -25,13 +25,13 @@ public class HttpStatusChecker {
             int responseCode = send.statusCode();
 
             if(responseCode != 200){
-                System.err.println("There is not image for HTTP status " + code);
-            } else  {
+                throw new IOException();
+            } else {
                 response.append(send.uri());
             }
 
         } catch (URISyntaxException | InterruptedException | IOException e) {
-            e.printStackTrace();
+            System.err.println("There is not image for HTTP status " + code);
         }
         return response.toString();
     }
