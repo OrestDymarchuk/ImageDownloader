@@ -32,8 +32,8 @@ public class HttpStatusChecker {
                 response.append(send.uri());
             }
 
-        } catch (URISyntaxException | InterruptedException | IOException e) {
-            //some actions
+        } catch (URISyntaxException | InterruptedException | IncorrectInputException | IOException e) {
+            System.out.println(e.getLocalizedMessage());
         }
         return response.toString();
     }

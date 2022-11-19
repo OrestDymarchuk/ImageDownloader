@@ -10,10 +10,17 @@ public class HttpStatusImageDownloader {
 
     public void downloadStatusImage(int code) {
 
-
         try {
             String uri = HTTP_STATUS_CHECKER.getStatusImage(code);
+
+            if (uri.isEmpty()){
+                new HttpImageStatusCli().askStatus();
+            }
+
             URL url = new URL(uri);
+
+            File dir = new File("Cat_Images");
+            dir.mkdir();
 
             String fileName = "Cat" + code + ".jpg";
             String fileDestinationFolder = "../ImageDownloader/Cat_Images/";
