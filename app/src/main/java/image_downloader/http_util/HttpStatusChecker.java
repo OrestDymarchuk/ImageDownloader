@@ -1,5 +1,7 @@
 package image_downloader.http_util;
 
+import image_downloader.IncorrectInputException;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -9,7 +11,7 @@ import java.net.http.HttpResponse;
 
 public class HttpStatusChecker {
     private static final HttpClient CLIENT = HttpClient.newHttpClient();
-    public String getStatusImage(int code) {
+    public String getStatusImage(int code) throws IncorrectInputException {
         StringBuilder response = new StringBuilder();
 
         try {
@@ -25,13 +27,13 @@ public class HttpStatusChecker {
             int responseCode = send.statusCode();
 
             if(responseCode != 200){
-                throw new IOException();
+                throw new IncorrectInputException("There is not image for HTTP status " + code);
             } else {
                 response.append(send.uri());
             }
 
         } catch (URISyntaxException | InterruptedException | IOException e) {
-            System.err.println("There is not image for HTTP status " + code);
+            //some actions
         }
         return response.toString();
     }
