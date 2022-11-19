@@ -28,9 +28,7 @@ public class HttpStatusImageDownloader {
             System.out.println("Cat with code " + code + " was downloaded");
 
 
-        } catch (IOException e) {
-            System.out.println("There is not image for HTTP status " + code);
-        }
+        } catch (IOException ignored) {}
     }
 }
 

@@ -26,8 +26,8 @@ public class HttpStatusChecker {
 
             if(responseCode == 200){
                 response.append(send.uri());
-            } else {
-                response.append("There is not image for HTTP status ").append(code);
+            } else  {
+                System.err.println("There is not image for HTTP status " + code);
             }
 
         } catch (URISyntaxException | InterruptedException | IOException e) {
