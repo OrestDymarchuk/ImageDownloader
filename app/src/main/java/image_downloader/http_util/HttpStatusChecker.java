@@ -34,6 +34,7 @@ public class HttpStatusChecker {
 
         } catch (URISyntaxException | InterruptedException | IncorrectInputException | IOException e) {
             System.out.println(e.getLocalizedMessage());
+            new HttpImageStatusCli().askStatus();
         }
         return response.toString();
     }
