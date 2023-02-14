@@ -8,6 +8,6 @@ import image_downloader.http_util.HttpImageStatusCli;
 public class App {
 
     public static void main(String[] args) {
-        new HttpImageStatusCli().askStatus();
+        HttpImageStatusCli.askStatus();
     }
 }
